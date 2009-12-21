@@ -1,13 +1,17 @@
 # gem 'httparty'
+require 'rubygems'
 require 'httparty'
-require 'tmdb_party/core_extensions'
-require 'tmdb_party/httparty_icebox'
-require 'tmdb_party/attributes'
-require 'tmdb_party/video'
-require 'tmdb_party/genre'
-require 'tmdb_party/person'
-require 'tmdb_party/image'
-require 'tmdb_party/movie'
+
+__FILE__=="./lib/tmdb_party.rb" ? where="./lib/tmdb_party" : where="tmdb_party"
+  
+require "#{where}/core_extensions"
+require "#{where}/httparty_icebox"
+require "#{where}/attributes"
+require "#{where}/video"
+require "#{where}/genre"
+require "#{where}/person"
+require "#{where}/image"
+require "#{where}/movie"
 
 module TMDBParty
   class Base
