@@ -24,9 +24,21 @@ module TMDBParty
 
     base_uri 'http://api.themoviedb.org/2.1'
     format :json
+
+    def readFile filename, maxlines=0
+      i=0
+      read_so_far=[]
+      f=File.open(File.expand_path(filename), 'r')
+      while (line=f.gets)
+        break if maxlines!=0 and i >= maxlines
+        read_so_far << line and i+=1
+      end
+      read_so_far
+    end
     
-    def initialize(key)
-      @api_key = key
+    def initialize(key=nil)
+      @api_key = key unless key.nil?
+      @api_key= readFile('apikey.txt').first.strip
     end
     
     def default_path_items
