@@ -37,8 +37,7 @@ module TMDBParty
     end
     
     def initialize(key=nil)
-      @api_key = key unless key.nil?
-      @api_key= readFile('apikey.txt').first.strip
+      !key.nil? ? (@api_key = key) : (@api_key= readFile('apikey.txt').first.strip)
     end
     
     def default_path_items
