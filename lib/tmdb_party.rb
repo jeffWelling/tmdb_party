@@ -15,11 +15,13 @@ require "tmdb_party/genre"
 require "tmdb_party/person"
 require "tmdb_party/image"
 require "tmdb_party/movie"
+require "tmdb_party/memoizable"
 
 module TMDBParty
   class Base
     include HTTParty
     include HTTParty::Icebox
+    extend Memoizable
     cache :store => 'file', :timeout => 120, :location => Dir.tmpdir
 
     base_uri 'http://api.themoviedb.org/2.1'
@@ -54,6 +56,7 @@ module TMDBParty
         data.collect { |movie| Movie.new(movie, self) }
       end
     end
+    memoize :search
     
     def imdb_lookup(imdb_id)
       data = self.class.get("/Movie.imdbLookup/" + default_path_items.join('/') + '/' + imdb_id)
