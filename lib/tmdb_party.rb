@@ -15,13 +15,13 @@ require "tmdb_party/genre"
 require "tmdb_party/person"
 require "tmdb_party/image"
 require "tmdb_party/movie"
-require "tmdb_party/memoizable"
+require "../memoizable/lib/memoizable.rb"
 
 module TMDBParty
   class Base
     include HTTParty
     include HTTParty::Icebox
-    extend Memoizable
+    include Memoizable
     cache :store => 'file', :timeout => 120, :location => Dir.tmpdir
 
     base_uri 'http://api.themoviedb.org/2.1'
